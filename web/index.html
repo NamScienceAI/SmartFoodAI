@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#244c3a"><title>SmartFood AI · Quản lý thực phẩm gia đình</title>
+  <link rel="stylesheet" href="/assets/app.css"><script defer src="/assets/app.js"></script>
+</head>
+<body>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <main id="auth-screen" class="auth-screen" hidden>
+    <section class="auth-card">
+      <a class="brand brand-large" href="/"><span class="brand-mark">✳</span><span>SmartFood <b>AI</b></span></a>
+      <p class="eyebrow">QUẢN LÝ THỰC PHẨM THÔNG MINH</p><h1 id="auth-heading">Chào mừng bạn trở lại</h1>
+      <p class="muted">Quản lý kho thực phẩm, theo dõi hạn sử dụng và lên kế hoạch bữa ăn cho gia đình.</p>
+      <form id="auth-form" class="form-stack">
+        <label>Tên đăng nhập<input name="username" autocomplete="username" minlength="3" maxlength="40" required placeholder="Ví dụ: nhatnam"></label>
+        <label>Mật khẩu<input name="password" type="password" autocomplete="current-password" minlength="8" maxlength="128" required placeholder="Ít nhất 8 ký tự"></label>
+        <button class="btn btn-primary btn-wide" id="auth-submit">Đăng nhập</button>
+      </form>
+      <button class="link-button" id="auth-toggle">Chưa có tài khoản? Tạo tài khoản</button>
+      <p class="auth-foot">Dữ liệu được lưu trong hệ thống SmartFood AI của bạn.</p>
+    </section>
+    <aside class="auth-art"><div class="art-orbit">🥬</div><div class="art-copy"><span class="eyebrow">ĂN TƯƠI · SỐNG XANH</span><h2>Sử dụng thực phẩm thông minh hơn, mỗi ngày.</h2><p>Biến nguyên liệu sẵn có thành những bữa ăn ngon và giảm lãng phí thực phẩm.</p></div><div class="art-note">✦ Ưu tiên sử dụng · Lập kế hoạch · Giảm lãng phí</div></aside>
+  </main>
+
+  <main id="onboard-screen" class="onboard-screen" hidden>
+    <div class="onboard-card"><a class="brand" href="/"><span class="brand-mark">✳</span>SmartFood <b>AI</b></a><span class="eyebrow">BẮT ĐẦU SỬ DỤNG</span><h1>Thiết lập hộ gia đình</h1><p class="muted">Tạo hộ mới hoặc tham gia hộ hiện có bằng mã mời.</p>
+      <div class="onboard-grid"><form id="create-house-form" class="surface-card form-stack"><div class="feature-icon">⌂</div><h2>Tạo hộ gia đình</h2><label>Tên hộ<input name="name" required maxlength="100" placeholder="Gia đình Nguyễn"></label><button class="btn btn-primary">Tạo hộ gia đình</button></form>
+      <form id="join-house-form" class="surface-card form-stack"><div class="feature-icon">↗</div><h2>Tham gia hộ</h2><label>Mã mời<input name="code" required maxlength="128" placeholder="Nhập mã được chia sẻ"></label><button class="btn btn-secondary">Tham gia hộ</button></form></div>
+      <button class="link-button" id="onboard-logout">Đăng xuất</button>
+    </div>
+  </main>
+
+  <div id="app-shell" class="app-shell" hidden>
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#dashboard"><span class="brand-mark">✳</span><span>SmartFood <b>AI</b></span></a>
+      <div class="side-label">KHÔNG GIAN LÀM VIỆC</div>
+      <nav class="nav-list" aria-label="Điều hướng chính">
+        <button class="nav-item active" data-page="dashboard"><span>⌂</span>Tổng quan</button>
+        <button class="nav-item" data-page="inventory"><span>▦</span>Kho thực phẩm</button>
+        <button class="nav-item" data-page="receipts"><span>▤</span>Quét hóa đơn</button>
+        <button class="nav-item" data-page="alerts"><span>♧</span>Thông báo hạn <i id="nav-alert-count" class="nav-count" hidden>0</i></button>
+        <div class="side-label side-label-spaced">LẬP KẾ HOẠCH</div>
+        <button class="nav-item" data-page="recipes"><span>♨</span>Gợi ý món ăn</button>
+        <button class="nav-item" data-page="meals"><span>▣</span>Kế hoạch bữa ăn</button>
+        <button class="nav-item" data-page="groceries"><span>🛒</span>Danh sách mua sắm</button>
+        <div class="side-label side-label-spaced">THEO DÕI</div>
+        <button class="nav-item" data-page="reports"><span>▥</span>Thống kê lãng phí</button>
+        <button class="nav-item" data-page="household"><span>♙</span>Hộ gia đình</button>
+      </nav>
+      <div class="sidebar-bottom"><div class="household-chip"><span class="household-avatar">⌂</span><span><small>HỘ GIA ĐÌNH</small><b id="sidebar-house-name">—</b></span></div><button id="logout-btn" class="logout-link">↪ Đăng xuất</button></div>
+    </aside>
+    <section class="workspace">
+      <header class="topbar"><button class="mobile-menu" id="mobile-menu" aria-label="Mở menu">☰</button><div class="breadcrumb"><span>SmartFood AI</span><b>/</b><strong id="page-crumb">Tổng quan</strong></div><div class="top-actions"><button class="icon-btn" id="top-alert-btn" aria-label="Thông báo">♧<i id="top-alert-dot" hidden></i></button><div class="profile-mini"><span id="user-avatar">N</span><div><b id="top-username">Người dùng</b><small>Thành viên</small></div></div></div></header>
+      <div id="page-content" class="page-content"></div>
+      <footer class="footer">SmartFood AI <span>•</span> Sử dụng thực phẩm thông minh, hạn chế lãng phí.</footer>
+    </section>
+  </div>
+</body></html>
